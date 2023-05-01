@@ -164,32 +164,6 @@ app.get("/user/tweets/feed/", authenticateUser, async (request, response) => {
   response.send(tweets);
 });
 
-/*app.get("/user/following/", authenticateUser, async (request, response) => {
-  const { username } = request;
-  const selectUserQuery = `
-    SELECT * FROM user WHERE username = '${username}';
-    `;
-  const dbUser = await database.get(selectUserQuery);
-  const followingUsersQuery = `
-    SELECT following_user_id FROM follower 
-    WHERE follower_user_id = ${dbUser.user_id};
-  `;
-  const followingUsersObjectsList = await db.all(followingUsersQuery);
-  const followingUsersList = followingUsersObjectsList.map((object) => {
-    return object["following_user_id"];
-  });
-  const getFollowingQuery = `
-  SELECT 
-    user.name AS name
-  FROM 
-    user
-  WHERE
-    user_id IN (
-        ${followingUsersList}
-    );
-  `;
-  const following = await db.all(getFollowingQuery);
-  response.send(following);*/
 app.get("/user/following/", authenticateUser, async (request, response) => {
   const { username } = request;
 
